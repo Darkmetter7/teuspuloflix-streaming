@@ -129,6 +129,36 @@
       text-shadow: 0 0 8px rgba(255,255,255,0.08);
     }
 
+    .banner-teste {
+      display: block;
+      margin-top: 36px;
+      max-width: 580px;
+      background: linear-gradient(135deg, rgba(139,0,0,0.15), rgba(192,57,43,0.1));
+      border: 1px solid rgba(192,57,43,0.45);
+      border-radius: 8px;
+      padding: 16px 24px;
+      color: #ddd;
+      font-size: 15px;
+      line-height: 1.6;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 0 24px rgba(139,0,0,0.15), var(--sombra-branca);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      animation: fadeDown 1s ease 0.55s both;
+    }
+
+    .banner-teste strong {
+      color: var(--branco);
+      font-size: 16px;
+    }
+
+    .banner-teste:hover {
+      transform: translateY(-3px);
+      border-color: rgba(192,57,43,0.8);
+      box-shadow: 0 0 40px rgba(139,0,0,0.3), var(--sombra-branca);
+      color: #eee;
+    }
+
     .link-tv {
       color: var(--vermelho-vivo);
       text-decoration: none;
@@ -650,6 +680,9 @@
       <span>🎬 Filmes &amp; Séries</span>
       <span>🔄 Atualização semanal</span>
     </div>
+    <a class="banner-teste" href="https://wa.me/5551993683429?text=Oi%2C%20vim%20do%20site%2C%20quero%20saber%20mais" target="_blank" rel="noopener">
+      🎁 <strong>Quer testar antes de pagar?</strong> Libero 4 horas grátis pra você — é só chamar no WhatsApp.
+    </a>
   </section>
 
   <div class="linha-decorativa"></div>
