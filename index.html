@@ -4,7 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TeusPuloFlix — Streaming Completo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       🔐 FIX #4 — Headers de segurança via meta tags
+       ═══════════════════════════════════════════════════════════════ -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+             style-src 'self' 'unsafe-inline' https://fonts.bunny.net;
+             font-src https://fonts.bunny.net;
+             script-src 'self' 'unsafe-inline';
+             img-src 'self' data:;
+             connect-src 'none';
+             frame-ancestors 'none';
+             base-uri 'self'">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       🔐 FIX #9 — Impede indexação pública pelo Google/Bing
+       ═══════════════════════════════════════════════════════════════ -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       🔐 FIX #7 — Fonte migrada do Google Fonts para Bunny Fonts
+       (drop-in replacement, sem rastreamento de IP, GDPR-compliant)
+       ═══════════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin="anonymous">
+  <link href="https://fonts.bunny.net/css2?family=bebas-neue&family=barlow:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet"
+        crossorigin="anonymous" />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       🔐 FIX #13 — Fallback para usuários sem JavaScript:
+       sem JS o fade-in ficaria com opacity:0 para sempre
+       ═══════════════════════════════════════════════════════════════ -->
+  <noscript>
+    <style>.fade-in { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+
   <style>
     :root {
       --preto: #0a0a0a;
@@ -546,6 +584,17 @@
 
     .footer-nota strong { color: #888; }
 
+    /* ─── LGPD notice ─── */
+    .footer-lgpd {
+      font-size: 11px;
+      color: #333;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 16px auto 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding-top: 16px;
+    }
+
     /* ─── DIVIDER ─── */
     .divider {
       width: 60px;
@@ -658,8 +707,15 @@
 </head>
 <body>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       🔐 FIX #1 — Número removido do HTML. href="#" como placeholder.
+       O JS no final do body popula todos os .wa-link com o href real,
+       após decodificar o número ofuscado em base64.
+       FIX #3 — rel="noopener noreferrer" em todos os links externos.
+       ═══════════════════════════════════════════════════════════════ -->
+
   <!-- FLOATING CTA -->
-  <a class="float-cta" href="https://wa.me/5551993683429?text=Oi%2C%20vim%20do%20site%2C%20quero%20saber%20mais" target="_blank" rel="noopener">
+  <a class="float-cta wa-link" href="#" target="_blank" rel="noopener noreferrer">
     <span class="balao">Fala comigo no WhatsApp! 👋</span>
     💬 Clica pra saber mais
   </a>
@@ -680,7 +736,7 @@
       <span>🎬 Filmes &amp; Séries</span>
       <span>🔄 Atualização semanal</span>
     </div>
-    <a class="banner-teste" href="https://wa.me/5551993683429?text=Oi%2C%20vim%20do%20site%2C%20quero%20saber%20mais" target="_blank" rel="noopener">
+    <a class="banner-teste wa-link" href="#" target="_blank" rel="noopener noreferrer">
       <strong>Quer testar antes de pagar?</strong> Libero 4 horas grátis pra você — é só chamar no WhatsApp.
     </a>
   </section>
@@ -701,7 +757,7 @@
       <div class="card">
         <span class="card-icon">🖥️</span>
         <h3>Instala direto na sua Smart TV</h3>
-        <p>Configuramos direto na sua televisão, sem complicação. <a href="https://wa.me/5551993683429?text=Oi%2C%20vim%20do%20site%2C%20quero%20saber%20mais%20sobre%20os%20modelos%20de%20TV%20e%20apps%20dispon%C3%ADveis" target="_blank" rel="noopener" class="link-tv">Clica aqui pra saber os modelos de TV e apps disponíveis →</a></p>
+        <p>Configuramos direto na sua televisão, sem complicação. <a href="#" class="wa-link link-tv" target="_blank" rel="noopener noreferrer">Clica aqui pra saber os modelos de TV e apps disponíveis →</a></p>
       </div>
       <div class="card">
         <span class="card-icon">⚡</span>
@@ -836,13 +892,69 @@
       A taxa de adesão única — cobrada apenas na primeira contratação — é de <strong>R$100,00</strong>.
       Para mais informações, entre em contato via WhatsApp antes de assinar.
     </p>
-    <p class="footer-nota" style="margin-top:16px; color:#333;">© 2025 TeusPuloFlix · Streaming · Todos os direitos reservados</p>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         🔐 FIX #5 — Aviso LGPD (Lei 13.709/18)
+         Exigido por lei: informar o usuário sobre coleta de dados
+         antes do contato. Sem esse aviso, o site viola a LGPD.
+         ═══════════════════════════════════════════════════════════════ -->
+    <p class="footer-lgpd">
+      🔒 <strong>Privacidade:</strong> Ao entrar em contato via WhatsApp, você concorda que seus dados
+      (nome e número) serão usados exclusivamente para atendimento desta solicitação,
+      em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD — Lei 13.709/18)</strong>.
+      Seus dados não são compartilhados com terceiros.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         🔐 FIX #10 — Copyright com ano dinâmico via JS
+         O span#ano-footer é preenchido pelo script no final do body.
+         ═══════════════════════════════════════════════════════════════ -->
+    <p class="footer-nota" style="margin-top:16px; color:#333;">
+      © <span id="ano-footer"></span> TeusPuloFlix · Streaming · Todos os direitos reservados
+    </p>
   </footer>
 
   <script>
-    // Intersection Observer para fade-in ao rolar
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
+    /* ═══════════════════════════════════════════════════════════════
+       🔐 FIX #1 — Ofuscação do número de telefone
+       O número NÃO está mais em texto puro no HTML.
+       Está codificado em Base64 (Base64 = esquema de codificação
+       com 64 caracteres imprimíveis) e decodificado apenas em runtime.
+       Bots que leem HTML estático nunca vêem o número real.
+
+       Para atualizar o número no futuro:
+         1. Abra o console do navegador (F12)
+         2. Digite: btoa("SEU_NUMERO_AQUI")
+         3. Substitua a string abaixo pelo resultado
+       ═══════════════════════════════════════════════════════════════ */
+    (function() {
+      const _n  = atob("NTU1MTk5MzY4MzQyOQ==");   // número decodificado
+      const _m1 = atob("T2klMkMlMjB2aW0lMjBkbyUyMHNpdGUlMkMlMjBxdWVybyUyMHNhYmVyJTIwbWFpcw==");
+      const _m2 = atob("T2klMkMlMjB2aW0lMjBkbyUyMHNpdGUlMkMlMjBxdWVybyUyMHNhYmVyJTIwbWFpcyUyMHNvYnJlJTIwb3MlMjBtb2RlbG9zJTIwZGUlMjBUViUyMGUlMjBhcHBzJTIwZGlzcG9uw612ZWlz");
+
+      /* ════════════════════════════════════════════════════════════
+         🔐 FIX #12 — Pequena barreira anti-bot:
+         Links só são populados após 400ms (tempo humano normal,
+         mas suficiente para derrotar scrapers síncronos simples).
+         ════════════════════════════════════════════════════════════ */
+      setTimeout(function() {
+        document.querySelectorAll('.wa-link').forEach(function(el) {
+          const msg = el.classList.contains('link-tv') ? _m2 : _m1;
+          el.href = "https://wa.me/" + _n + "?text=" + msg;
+        });
+      }, 400);
+    })();
+
+    /* ═══════════════════════════════════════════════════════════════
+       🔐 FIX #10 — Ano do copyright sempre atualizado automaticamente
+       ═══════════════════════════════════════════════════════════════ */
+    document.getElementById('ano-footer').textContent = new Date().getFullYear();
+
+    /* ═══════════════════════════════════════════════════════════════
+       Intersection Observer para fade-in ao rolar (código original)
+       ═══════════════════════════════════════════════════════════════ */
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
           observer.unobserve(e.target);
@@ -850,7 +962,9 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(function(el) {
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>
